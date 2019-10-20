@@ -1,4 +1,4 @@
-'''Tests'''
+'''Module tests'''
 
 from hangman import check_letter, print_word
 
