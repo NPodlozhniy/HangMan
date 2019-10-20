@@ -1,85 +1,112 @@
-class Node:
-    def __init__(self, value = None, next = None):
-        self.value = value
-        self.next = next
+'''Hangman-game'''
 
-class One_linked_list:
-    def __init__(self):
-        self.first = None
-        self.middle = None
-        self.last = None
-        self.mod_2 = 0
+import numpy as np
 
-    def clear(self):
-        self.__init__()
-        
-# указатель middle всегда лежит на центральном элементе при нечетном их кол-ве, и на более раннем при четном
-    def push(self, x):
-        if self.first == None:
-            self.first = Node(x, None)
-            self.middle = self.first
-            self.last = self.first
-        else:
-            self.last.next = Node(x, None)
-            self.last = self.last.next
-            if self.mod_2 % 2 == 0:
-                self.middle = self.middle.next
-        self.mod_2 += 1
+def init():
+    ''' 
+    Hangman initialisation
+    '''
+    guessed, wrong = [], []
+    max_mistakes = 5
 
-    def pop(self):
-        if self.first == None:
-            return None
-        elif self.first == self.last:
-            val = self.first.value
-            self.first = self.first.next
-            self.middle = self.first
-            self.last = self.first
-        else:
-            val = self.first.value
-            self.first = self.first.next
-            if self.mod_2 % 2 == 0:
-                self.middle = self.middle.next
-        self.mod_2 -= 1
-        return val
+    print("Hi, user! What's your name?")
+    usr_nm = input()
+    print("Dear {}, welcome to the game Hangman!".format(usr_nm))
+
+    with open('words_list.txt', 'r') as file_obj:
+        words_list = list(file_obj.read().split())
     
-    def size(self):
-        length = 0
-        if self.first != None:
-            current = self.first
-            while current.next != None:
-                current = current.next
-                length += 1
-        return length + 1
+    hangman(words_list, guessed, wrong, max_mistakes)
     
-    def push_vip(self, x):
-        if self.first == None:
-            self.first = Node(x, None)
-            self.middle = self.first
-            self.last = self.first
+    
+def check_letter(guess, word, cur_mistakes, max_mistakes, guessed, wrong):
+    '''
+    Check that hidden word contin input letter
+    '''
+    if guess in guessed or guess in wrong:
+        print("Letter already guessed", "\n")
+    elif guess in word:
+        print("Hit!", "\n")
+        guessed.append(guess)
+    else:
+        cur_mistakes += 1
+        print("Missed, mistake {} out of {}".format(cur_mistakes, max_mistakes), "\n")
+        wrong.append(guess)
+    return cur_mistakes, guessed, wrong
+    
+def print_word(word, guessed):
+    '''
+    Print word on a screen
+    '''
+    out = ''
+    for letter in word:
+        if letter in guessed:
+            out = out + letter
         else:
-            self.middle.next = Node(x, self.middle.next)
-            if self.mod_2 == 1:
-                self.last = self.last.next
-            if self.mod_2 % 2 == 0:
-                self.middle = self.middle.next
-        self.mod_2 += 1
+            out = out + "*"
+    print("The word: {}".format(out), "\n")
+    return out
+
+def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
+    '''
+    Input: word, words_list, cur_mistakes, guessed, wrong
+    Asks the player to play again
+    Returns new words, cur_mistakes to 0, guessed and wrong to [] if 'y' is pressed
+        and only change cur_mistakes to max_mistakes if 'n' is pressed
+    '''
+    clear_answer = False
+    
+    while clear_answer == False:
+        again = print("Would you like to play again? y or n", "\n")
+        again = input().lower()
+       
+        if again == 'n':  
+            clear_answer = True
+            print('Goodbye! Thank you for playing.')
+            cur_mistakes = max_mistakes
+        elif again == 'y':
+            print("Let's pick a new word...")
+            word = np.random.choice(words_list)
+            print("The hidden word contains {} letters.".format(len(word)))
+            guessed = []
+            wrong = []
+            cur_mistakes = 0
+            clear_answer = True
+        else:
+            print("I didn't get that.")
+    return word, cur_mistakes, guessed, wrong
+
+def hangman(words_list, guessed = [], wrong = [], max_mistakes = 5):
+    '''
+    Starts up an interactive game of Hangman.
+    * At the start of the game, let the user know how many 
+      letters the hidden word contains.
+    * Ask the user to supply one guess (i.e. letter) per round.
+    * The user should receive feedback immediately after each guess 
+      about whether their guess appears in the hidden word.
+    * After each round, you should also display to the user the 
+      partially guessed word so far
+    * After each win or loss, user have a chance to choose
+      between two variants: left the game and continue 
+    '''
+    word = np.random.choice(words_list)
+
+    print("The hidden word contains {} letters.".format(len(word)))
+    print("You might make {} mistakes in total.".format(max_mistakes))
+    print("You can guess one letter per round.", "\n")
+
+    cur_mistakes = 0
+
+    while max_mistakes > cur_mistakes:
         
-goblins_que = One_linked_list() 
-N = int(input()) 
-out_arr = []
-
-for i in range(N):
-
-    input_pair = input().split() 
-
-    if input_pair[0] == '+': 
-        goblins_que.push(input_pair[1]) 
-
-    elif input_pair[0] == '*': 
-        goblins_que.push_vip(input_pair[1]) 
-
-    else: 
-        out_arr.append(goblins_que.pop()) 
-
-for num in out_arr: 
-    print(num)
+        print("Guess a letter:")
+        cur_mistakes, guessed, wrong = check_letter(input(), word, cur_mistakes, max_mistakes, guessed, wrong)
+        out = print_word(word, guessed)
+        
+        if out == word or max_mistakes == cur_mistakes:
+            if out == word:
+                print("You won!")
+            else:
+                print("You lost!", "\n")
+                print("Correct word: {}".format(word))
+            word, cur_mistakes, guessed, wrong = play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong)
