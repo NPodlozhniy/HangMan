@@ -1,5 +1,5 @@
-[![codecov](https://codecov.io/gh/NPodlozhniy/HangMan/branch/master/graph/badge.svg)](https://codecov.io/gh/NPodlozhniy/HangMan)
 [![Build Status](https://travis-ci.org/NPodlozhniy/HangMan.svg?branch=master)](https://travis-ci.org/NPodlozhniy/HangMan)
+[![codecov](https://codecov.io/gh/NPodlozhniy/HangMan/branch/master/graph/badge.svg)](https://codecov.io/gh/NPodlozhniy/HangMan)
 
 # HangMan
 This project is second homework for course of Principles, Practices, and Patterns of Software Design.
