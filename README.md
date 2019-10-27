@@ -13,3 +13,5 @@ This is the popular game with several simple rules, which were noticed below
 Status by Travis :
 
 [![Build Status](https://travis-ci.org/NPodlozhniy/HangMan.svg?branch=master)](https://travis-ci.org/NPodlozhniy/HangMan)
+
+[![codecov](https://codecov.io/gh/NPodlozhniy/HangMan/branch/master/graph/badge.svg)](https://codecov.io/gh/NPodlozhniy/HangMan)
