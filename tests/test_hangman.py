@@ -26,3 +26,9 @@ def test_print_word():
     assert print_word('test', ['t']) == 't**t'
     assert print_word('print', ['i', 'p']) == 'p*i**'
     assert print_word('word', ['a']) == '****'
+
+    
+def test_new_word():
+    '''Module test by correct work function pick_a_new_word'''
+    assert pick_a_new_word(['pepa'], 5) == ('pepa')
+    assert pick_a_new_word(['pepe', 'pepe'], 5) == ('pepe')
