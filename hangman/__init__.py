@@ -33,7 +33,8 @@ def check_letter(guess, word, cur_mistakes, max_mistakes, guessed, wrong):
         print("Missed, mistake {} out of {}".format(cur_mistakes, max_mistakes), "\n")
         wrong.append(guess)
     return cur_mistakes, guessed, wrong
-    
+
+
 def print_word(word, guessed):
     '''
     Print word on a screen
@@ -46,6 +47,7 @@ def print_word(word, guessed):
             out = out + "*"
     print("The word: {}".format(out), "\n")
     return out
+
 
 def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
     '''
@@ -75,6 +77,7 @@ def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
         else:
             print("I didn't get that.")
     return word, cur_mistakes, guessed, wrong
+
 
 def hangman(words_list, guessed = [], wrong = [], max_mistakes = 5):
     '''
