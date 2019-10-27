@@ -73,7 +73,7 @@ def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
     return word, cur_mistakes, guessed, wrong
 
 
-def hangman(words_list, guessed=None, wrong=None, max_mistakes=5):
+def hangman(words_list, guessed, wrong, max_mistakes):
     '''Starts up an interactive game of Hangman.
     * At the start of the game, let the user know how many
       letters the hidden word contains.
