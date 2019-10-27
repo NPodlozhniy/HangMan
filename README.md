@@ -14,4 +14,6 @@ Status by Travis :
 
 [![Build Status](https://travis-ci.org/NPodlozhniy/HangMan.svg?branch=master)](https://travis-ci.org/NPodlozhniy/HangMan)
 
+Coverage by Codecov :
+
 [![codecov](https://codecov.io/gh/NPodlozhniy/HangMan/branch/master/graph/badge.svg)](https://codecov.io/gh/NPodlozhniy/HangMan)
