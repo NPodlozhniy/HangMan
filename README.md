@@ -1,3 +1,6 @@
+[![codecov](https://codecov.io/gh/NPodlozhniy/HangMan/branch/master/graph/badge.svg)](https://codecov.io/gh/NPodlozhniy/HangMan)
+[![Build Status](https://travis-ci.org/NPodlozhniy/HangMan.svg?branch=master)](https://travis-ci.org/NPodlozhniy/HangMan)
+
 # HangMan
 This project is second homework for course of Principles, Practices, and Patterns of Software Design.
 This is the popular game with several simple rules, which were noticed below
@@ -10,10 +13,3 @@ This is the popular game with several simple rules, which were noticed below
 * If user have lost and havn't guessed the word - it will be showned;
 * At the end of game (no matter win or lose) user can play and try to win again;
 
-Status by Travis :
-
-[![Build Status](https://travis-ci.org/NPodlozhniy/HangMan.svg?branch=master)](https://travis-ci.org/NPodlozhniy/HangMan)
-
-Coverage by Codecov :
-
-[![codecov](https://codecov.io/gh/NPodlozhniy/HangMan/branch/master/graph/badge.svg)](https://codecov.io/gh/NPodlozhniy/HangMan)
