@@ -1,6 +1,6 @@
 '''Module tests'''
-
 from hangman import check_letter, print_word
+
 
 def test_check_letter():
     '''
