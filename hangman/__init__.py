@@ -14,7 +14,7 @@ def init():
     hangman(words_list, guessed, wrong, max_mistakes)
 
 
-def check_letter(guess, word, cur_mistakes, max_mistakes, guessed, wrong):
+def check_letter(guess, word, cur_mistakes, guessed, wrong):
     '''Check that hidden word contin input letter'''
     if guess in guessed or guess in wrong:
         print("Letter already guessed", "\n")
@@ -24,7 +24,7 @@ def check_letter(guess, word, cur_mistakes, max_mistakes, guessed, wrong):
     else:
         cur_mistakes += 1
         print("Missed, mistake {} out of {}".format(cur_mistakes,
-                                                    max_mistakes),
+                                                    5),
               "\n")
         wrong.append(guess)
     return cur_mistakes, guessed, wrong
@@ -43,7 +43,7 @@ def print_word(word, guessed):
     return out
 
 
-def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
+def play_again(word, words_list, cur_mistakes, guessed, wrong):
     '''Input: word, words_list, cur_mistakes, guessed, wrong
     Asks the player to play again
     Returns new words,
@@ -59,7 +59,7 @@ def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
         if again == 'n':
             clear_answer = True
             print('Goodbye! Thank you for playing.')
-            cur_mistakes = max_mistakes
+            cur_mistakes = 5
         elif again == 'y':
             print("Let's pick a new word...")
             word = np.random.choice(words_list)
@@ -94,7 +94,6 @@ def hangman(words_list, guessed, wrong, max_mistakes):
         cur_mistakes, guessed, wrong = check_letter(input(),
                                                     word,
                                                     cur_mistakes,
-                                                    max_mistakes,
                                                     guessed,
                                                     wrong)
         out = print_word(word, guessed)
@@ -107,6 +106,5 @@ def hangman(words_list, guessed, wrong, max_mistakes):
             word, cur_mistakes, guessed, wrong = play_again(word,
                                                             words_list,
                                                             cur_mistakes,
-                                                            max_mistakes,
                                                             guessed,
                                                             wrong)
