@@ -24,8 +24,8 @@ def test_check_letter():
                         5,
                         ['e'],
                         ['o']) == (2, ['e'], ['o', 'a'])
-    
-    
+
+
 def test_print_word():
     '''
     Module test by correct work function print_word
