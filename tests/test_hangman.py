@@ -6,9 +6,24 @@ def test_check_letter():
     '''
     Module test by correct work function check_letter
     '''
-    assert check_letter('t', 'test', 1, 5, ['e'], ['o']) == (1, ['e','t'], ['o'])
-    assert check_letter('e', 'check', 1, 5, ['e'], ['o']) == (1, ['e'], ['o'])
-    assert check_letter('a', 'letter', 1, 5, ['e'], ['o']) == (2, ['e'], ['o','a'])
+    assert check_letter('t',
+                        'test',
+                        1,
+                        5,
+                        ['e'],
+                        ['o']) == (1, ['e', 't'], ['o'])
+    assert check_letter('e',
+                        'check',
+                        1,
+                        5,
+                        ['e'],
+                        ['o']) == (1, ['e'], ['o'])
+    assert check_letter('a',
+                        'letter',
+                        1,
+                        5,
+                        ['e'],
+                        ['o']) == (2, ['e'], ['o', 'a'])
 
 def test_print_word():
     '''
