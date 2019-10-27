@@ -23,7 +23,8 @@ def check_letter(guess, word, cur_mistakes, max_mistakes, guessed, wrong):
         guessed.append(guess)
     else:
         cur_mistakes += 1
-        print("Missed, mistake {} out of {}".format(cur_mistakes, max_mistakes),
+        print("Missed, mistake {} out of {}".format(cur_mistakes,
+                                                    max_mistakes),
               "\n")
         wrong.append(guess)
     return cur_mistakes, guessed, wrong
@@ -45,8 +46,11 @@ def print_word(word, guessed):
 def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
     '''Input: word, words_list, cur_mistakes, guessed, wrong
     Asks the player to play again
-    Returns new words, cur_mistakes to 0, guessed and wrong to [] if 'y' is pressed
-        and only change cur_mistakes to max_mistakes if 'n' is pressed'''
+    Returns new words,
+    cur_mistakes to 0,
+    guessed and wrong to []
+    if 'y' is pressed.
+    Change cur_mistakes to max_mistakes if 'n' is pressed'''
     clear_answer = False
     while clear_answer is False:
         again = print("Would you like to play again? y or n",
@@ -69,15 +73,15 @@ def play_again(word, words_list, cur_mistakes, max_mistakes, guessed, wrong):
     return word, cur_mistakes, guessed, wrong
 
 
-def hangman(words_list, guessed = [], wrong = [], max_mistakes = 5):
+def hangman(words_list, guessed=[], wrong=[], max_mistakes=5):
     '''Starts up an interactive game of Hangman.
-    * At the start of the game, let the user know how many 
+    * At the start of the game, let the user know how many
       letters the hidden word contains.
     * Ask the user to supply one guess (i.e. letter) per round.
-    * The user should receive feedback immediately after each guess 
+    * The user should receive feedback immediately after each guess
       about whether their guess appears in the hidden word.
-    * After each round, you should also display to the user the 
-      partially guessed word so far
+    * After each round, you should also display to the user the
+      partially guessed word so far.
     * After each win or loss, user have a chance to choose
       between two variants: left the game and continue'''
     word = np.random.choice(words_list)
