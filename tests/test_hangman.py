@@ -1,5 +1,5 @@
 '''Module tests'''
-from hangman import check_letter, print_word
+from hangman import check_letter, print_word, pick_a_new_word
 
 
 def test_check_letter():
@@ -27,7 +27,7 @@ def test_print_word():
     assert print_word('print', ['i', 'p']) == 'p*i**'
     assert print_word('word', ['a']) == '****'
 
-    
+
 def test_new_word():
     '''Module test by correct work function pick_a_new_word'''
     assert pick_a_new_word(['pepa'], 5) == ('pepa')
