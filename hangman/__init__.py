@@ -59,7 +59,7 @@ def pick_a_new_word(words_list, max_mistakes):
     Told to the user about the rules'''
     print("Let's pick a new word...")
     time.sleep(1)
-    word =  np.random.choice(words_list)
+    word = np.random.choice(words_list)
     print("The hidden word contains {} letters!".format(len(word)))
     print("You might make {} mistakes in total.".format(max_mistakes))
     print("You can guess one letter per round.", "\n")
