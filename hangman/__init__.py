@@ -1,17 +1,17 @@
 '''Hangman-game'''
 import numpy as np
+import time
 
 
 def init():
     '''Hangman initialisation'''
-    guessed, wrong = [], []
     max_mistakes = 5
     print("Hi, user! What's your name?")
     usr_nm = input()
     print("Dear {}, welcome to the game Hangman!".format(usr_nm))
     with open('words_list.txt', 'r') as file_obj:
         words_list = list(file_obj.read().split())
-    hangman(words_list, guessed, wrong, max_mistakes)
+    hangman(words_list, max_mistakes)
 
 
 def check_letter(guess, word, cur_mistakes, guessed, wrong):
@@ -43,37 +43,30 @@ def print_word(word, guessed):
     return out
 
 
-def play_again(word, words_list, cur_mistakes, guessed, wrong):
-    '''Input: word, words_list, cur_mistakes, guessed, wrong
-    Asks the player to play again
-    Returns new words,
-    cur_mistakes to 0,
-    guessed and wrong to []
-    if 'y' is pressed.
-    Change cur_mistakes to max_mistakes if 'n' is pressed'''
-    clear_answer = False
-    while clear_answer is False:
-        again = print("Would you like to play again? y or n",
-                      "\n")
+def get_wish():
+    '''Ask the player does he would like to play again ?'''
+    print("Would you like to play again? y or n", "\n")
+    again = input().lower()
+    while again != 'n' and again != 'y':
+        print("I didn't get that.")
+        print("Would you like to play again? y or n", "\n")
         again = input().lower()
-        if again == 'n':
-            clear_answer = True
-            print('Goodbye! Thank you for playing.')
-            cur_mistakes = 5
-        elif again == 'y':
-            print("Let's pick a new word...")
-            word = np.random.choice(words_list)
-            print("The hidden word contains {} letters!".format(len(word)))
-            guessed = []
-            wrong = []
-            cur_mistakes = 0
-            clear_answer = True
-        else:
-            print("I didn't get that.")
-    return word, cur_mistakes, guessed, wrong
+    return again
 
 
-def hangman(words_list, guessed, wrong, max_mistakes):
+def pick_a_new_word(words_list, max_mistakes):
+    '''Choose new word from words_list
+    Told to the user about the rules'''
+    print("Let's pick a new word...")
+    time.sleep(1)
+    word =  np.random.choice(words_list)
+    print("The hidden word contains {} letters!".format(len(word)))
+    print("You might make {} mistakes in total.".format(max_mistakes))
+    print("You can guess one letter per round.", "\n")
+    return word
+
+
+def hangman(words_list, max_mistakes):
     '''Starts up an interactive game of Hangman.
     * At the start of the game, let the user know how many
       letters the hidden word contains.
@@ -84,11 +77,8 @@ def hangman(words_list, guessed, wrong, max_mistakes):
       partially guessed word so far.
     * After each win or loss, user have a chance to choose
       between two variants: left the game and continue'''
-    word = np.random.choice(words_list)
-    print("The hidden word contains {} letters.".format(len(word)))
-    print("You might make {} mistakes in total.".format(max_mistakes))
-    print("You can guess one letter per round.", "\n")
-    cur_mistakes = 0
+    word = pick_a_new_word(words_list, max_mistakes)
+    guessed, wrong, cur_mistakes = [], [], 0
     while max_mistakes > cur_mistakes:
         print("Guess a letter:")
         cur_mistakes, guessed, wrong = check_letter(input(),
@@ -103,8 +93,9 @@ def hangman(words_list, guessed, wrong, max_mistakes):
             else:
                 print("You lost!", "\n")
                 print("Correct word: {}".format(word))
-            word, cur_mistakes, guessed, wrong = play_again(word,
-                                                            words_list,
-                                                            cur_mistakes,
-                                                            guessed,
-                                                            wrong)
+            wish = get_wish()
+            if wish == 'n':
+                print('Goodbye! Thank you for playing.')
+                cur_mistakes = 5
+            elif wish == 'y':
+                hangman(words_list, max_mistakes)
