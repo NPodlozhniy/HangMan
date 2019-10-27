@@ -3,6 +3,8 @@ python:
   - 3.7.1
 cache:
   - cargo
+before_install:
+  - sudo pip install codecov
 install:
   - pip install codecov
 script:
