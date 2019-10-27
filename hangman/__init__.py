@@ -47,7 +47,7 @@ def get_wish():
     '''Ask the player does he would like to play again ?'''
     print("Would you like to play again? y or n", "\n")
     again = input().lower()
-    while again != 'n' and again != 'y':
+    while again not in ('n', 'y'):
         print("I didn't get that.")
         print("Would you like to play again? y or n", "\n")
         again = input().lower()
