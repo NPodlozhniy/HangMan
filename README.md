@@ -11,5 +11,5 @@ This is the popular game with several simple rules, which were noticed below
 * If this letter is in the word, the place of all this letter will be shown;
 * If not, you will lose one attempt;
 * If user have lost and havn't guessed the word - it will be showned;
-* At the end of game (no matter win or lose) user can play and try to win again;
+* At the end of game (no matter win or lose) user can try to win again immediately;
 
