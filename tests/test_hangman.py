@@ -1,9 +1,6 @@
 '''Module tests'''
-from hangman import 
-check_letter,
-print_word,
-pick_a_new_word,
-get_wish
+from hangman import check_letter, print_word
+from hangman import pick_a_new_word, get_wish
 
 
 def test_check_letter():
