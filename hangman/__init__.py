@@ -94,8 +94,8 @@ def hangman(words_list, max_mistakes):
                 print("You lost!", "\n")
                 print("Correct word: {}".format(word))
             wish = get_wish()
+            cur_mistakes = max_mistakes
             if wish == 'n':
                 print('Goodbye! Thank you for playing.')
-                cur_mistakes = 5
             elif wish == 'y':
                 hangman(words_list, max_mistakes)
